@@ -4,6 +4,8 @@
 #include <intrin.h>		// __debugbreak()
 #endif
 
+#include <cstring>		// memset()
+
 //------------------------------------------------------------------------------
 
 #if defined _DEBUG && _MSC_VER

@@ -30,7 +30,7 @@ struct Status {
 	}
 };
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 struct Context {
 	using History = std::vector<Status>;
@@ -53,7 +53,7 @@ struct Context {
 	History history;
 };
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 using Machine = hfsm::Machine<Context>;
 
@@ -92,26 +92,26 @@ using Base = Machine::BaseT<Machine::Tracked, Machine::Timed, HistoryBase<T>>;
 template <typename T, typename TControl>
 void
 changeTo(TControl& control, Context::History& history) {
-	control.changeTo<T>();
-	history.push_back(Status{ Event::Restart, typeid(T) });
+	control.template changeTo<T>();
+	history.push_back(Status{ Event::Restart, std::type_index{typeid(T)} });
 }
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 template <typename T, typename TControl>
 void
 resume(TControl& control, Context::History& history) {
-	control.resume<T>();
-	history.push_back(Status{ Event::Resume, typeid(T) });
+	control.template resume<T>();
+	history.push_back(Status{ Event::Resume, std::type_index{typeid(T)} });
 }
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 template <typename T, typename TControl>
 void
 schedule(TControl& control, Context::History& history) {
-	control.schedule<T>();
-	history.push_back(Status{ Event::Schedule, typeid(T) });
+	control.template schedule<T>();
+	history.push_back(Status{ Event::Schedule, std::type_index{typeid(T)} });
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ struct A_2
 	}
 };
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 struct A_2_1 : Base<A_2_1> {};
 struct A_2_2 : Base<A_2_2> {};
@@ -166,7 +166,7 @@ struct B_1_2 : Base<B_1_2> {};
 
 struct B_2 : Base<B_2> {};
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 struct B_2_1
 	: Base<B_2_1>
@@ -176,7 +176,7 @@ struct B_2_1
 	}
 };
 
-//贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩贩
+//路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路路
 
 struct B_2_2
 	: Base<B_2_2>
@@ -206,7 +206,7 @@ struct B_2_2
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void
+int
 main(int /*argc*/, char* /*argv*/[]) {
 	Context _;
 
@@ -239,8 +239,8 @@ main(int /*argc*/, char* /*argv*/[]) {
 		static_assert(machine.ProngCount == 10);
 
 		const Status created[] = {
-			Status{ Event::Enter, typeid(A) },
-			Status{ Event::Enter, typeid(A_1) },
+			Status{ Event::Enter, std::type_index{typeid(A)} },
+			Status{ Event::Enter, std::type_index{typeid(A_1)} },
 		};
 		_.assertHistory(created);
 
@@ -248,20 +248,20 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update1[] = {
-			Status{ Event::Update, typeid(A) },
-			Status{ Event::Transition, typeid(A) },
-			Status{ Event::Update, typeid(A_1) },
-			Status{ Event::Transition, typeid(A_1) },
+			Status{ Event::Update, std::type_index{typeid(A)} },
+			Status{ Event::Transition, std::type_index{typeid(A)} },
+			Status{ Event::Update, std::type_index{typeid(A_1)} },
+			Status{ Event::Transition, std::type_index{typeid(A_1)} },
 
-			Status{ Event::Restart, typeid(A_2) },
+			Status{ Event::Restart, std::type_index{typeid(A_2)} },
 
-			Status{ Event::Substitute, typeid(A_2) },
-			Status{ Event::Substitute, typeid(A_2_1) },
+			Status{ Event::Substitute, std::type_index{typeid(A_2)} },
+			Status{ Event::Substitute, std::type_index{typeid(A_2_1)} },
 
-			Status{ Event::Leave, typeid(A_1) },
+			Status{ Event::Leave, std::type_index{typeid(A_1)} },
 
-			Status{ Event::Enter, typeid(A_2) },
-			Status{ Event::Enter, typeid(A_2_1) },
+			Status{ Event::Enter, std::type_index{typeid(A_2)} },
+			Status{ Event::Enter, std::type_index{typeid(A_2_1)} },
 		};
 		_.assertHistory(update1);
 
@@ -269,29 +269,29 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update2[] = {
-			Status{ Event::Update, typeid(A) },
-			Status{ Event::Transition, typeid(A) },
-			Status{ Event::Update, typeid(A_2) },
-			Status{ Event::Transition, typeid(A_2) },
-			Status{ Event::Restart, typeid(B_2_2) },
+			Status{ Event::Update, std::type_index{typeid(A)} },
+			Status{ Event::Transition, std::type_index{typeid(A)} },
+			Status{ Event::Update, std::type_index{typeid(A_2)} },
+			Status{ Event::Transition, std::type_index{typeid(A_2)} },
+			Status{ Event::Restart, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Update, typeid(A_2_1) },
+			Status{ Event::Update, std::type_index{typeid(A_2_1)} },
 
-			Status{ Event::Substitute, typeid(B) },
-			Status{ Event::Substitute, typeid(B_1) },
-			Status{ Event::Substitute, typeid(B_1_1) },
-			Status{ Event::Substitute, typeid(B_2) },
-			Status{ Event::Substitute, typeid(B_2_2) },
+			Status{ Event::Substitute, std::type_index{typeid(B)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_1)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_2)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Leave, typeid(A_2_1) },
-			Status{ Event::Leave, typeid(A_2) },
-			Status{ Event::Leave, typeid(A) },
+			Status{ Event::Leave, std::type_index{typeid(A_2_1)} },
+			Status{ Event::Leave, std::type_index{typeid(A_2)} },
+			Status{ Event::Leave, std::type_index{typeid(A)} },
 
-			Status{ Event::Enter, typeid(B) },
-			Status{ Event::Enter, typeid(B_1) },
-			Status{ Event::Enter, typeid(B_1_1) },
-			Status{ Event::Enter, typeid(B_2) },
-			Status{ Event::Enter, typeid(B_2_2) },
+			Status{ Event::Enter, std::type_index{typeid(B)} },
+			Status{ Event::Enter, std::type_index{typeid(B_1)} },
+			Status{ Event::Enter, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Enter, std::type_index{typeid(B_2)} },
+			Status{ Event::Enter, std::type_index{typeid(B_2_2)} },
 		};
 		_.assertHistory(update2);
 
@@ -299,32 +299,32 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update3[] = {
-			Status{ Event::Update, typeid(B) },
-			Status{ Event::Transition, typeid(B) },
-			Status{ Event::Update, typeid(B_1) },
-			Status{ Event::Transition, typeid(B_1) },
-			Status{ Event::Update, typeid(B_1_1) },
-			Status{ Event::Transition, typeid(B_1_1) },
-			Status{ Event::Update, typeid(B_2) },
-			Status{ Event::Transition, typeid(B_2) },
-			Status{ Event::Update, typeid(B_2_2) },
-			Status{ Event::Transition, typeid(B_2_2) },
+			Status{ Event::Update, std::type_index{typeid(B)} },
+			Status{ Event::Transition, std::type_index{typeid(B)} },
+			Status{ Event::Update, std::type_index{typeid(B_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2)} },
+			Status{ Event::Update, std::type_index{typeid(B_2_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Resume, typeid(A) },
+			Status{ Event::Resume, std::type_index{typeid(A)} },
 
-			Status{ Event::Substitute, typeid(A) },
-			Status{ Event::Substitute, typeid(A_2) },
-			Status{ Event::Substitute, typeid(A_2_1) },
+			Status{ Event::Substitute, std::type_index{typeid(A)} },
+			Status{ Event::Substitute, std::type_index{typeid(A_2)} },
+			Status{ Event::Substitute, std::type_index{typeid(A_2_1)} },
 
-			Status{ Event::Leave, typeid(B_1_1) },
-			Status{ Event::Leave, typeid(B_1) },
-			Status{ Event::Leave, typeid(B_2_2) },
-			Status{ Event::Leave, typeid(B_2) },
-			Status{ Event::Leave, typeid(B) },
+			Status{ Event::Leave, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Leave, std::type_index{typeid(B_1)} },
+			Status{ Event::Leave, std::type_index{typeid(B_2_2)} },
+			Status{ Event::Leave, std::type_index{typeid(B_2)} },
+			Status{ Event::Leave, std::type_index{typeid(B)} },
 
-			Status{ Event::Enter, typeid(A) },
-			Status{ Event::Enter, typeid(A_2) },
-			Status{ Event::Enter, typeid(A_2_1) },
+			Status{ Event::Enter, std::type_index{typeid(A)} },
+			Status{ Event::Enter, std::type_index{typeid(A_2)} },
+			Status{ Event::Enter, std::type_index{typeid(A_2_1)} },
 		};
 		_.assertHistory(update3);
 
@@ -332,28 +332,28 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update4[] = {
-			Status{ Event::Update, typeid(A) },
-			Status{ Event::Transition, typeid(A) },
-			Status{ Event::Update, typeid(A_2) },
-			Status{ Event::Transition, typeid(A_2) },
-			Status{ Event::Resume, typeid(B) },
-			Status{ Event::Update, typeid(A_2_1) },
+			Status{ Event::Update, std::type_index{typeid(A)} },
+			Status{ Event::Transition, std::type_index{typeid(A)} },
+			Status{ Event::Update, std::type_index{typeid(A_2)} },
+			Status{ Event::Transition, std::type_index{typeid(A_2)} },
+			Status{ Event::Resume, std::type_index{typeid(B)} },
+			Status{ Event::Update, std::type_index{typeid(A_2_1)} },
 
-			Status{ Event::Substitute, typeid(B) },
-			Status{ Event::Substitute, typeid(B_1) },
-			Status{ Event::Substitute, typeid(B_1_1) },
-			Status{ Event::Substitute, typeid(B_2) },
-			Status{ Event::Substitute, typeid(B_2_2) },
+			Status{ Event::Substitute, std::type_index{typeid(B)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_1)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_2)} },
+			Status{ Event::Substitute, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Leave, typeid(A_2_1) },
-			Status{ Event::Leave, typeid(A_2) },
-			Status{ Event::Leave, typeid(A) },
+			Status{ Event::Leave, std::type_index{typeid(A_2_1)} },
+			Status{ Event::Leave, std::type_index{typeid(A_2)} },
+			Status{ Event::Leave, std::type_index{typeid(A)} },
 
-			Status{ Event::Enter, typeid(B) },
-			Status{ Event::Enter, typeid(B_1) },
-			Status{ Event::Enter, typeid(B_1_1) },
-			Status{ Event::Enter, typeid(B_2) },
-			Status{ Event::Enter, typeid(B_2_2) },
+			Status{ Event::Enter, std::type_index{typeid(B)} },
+			Status{ Event::Enter, std::type_index{typeid(B_1)} },
+			Status{ Event::Enter, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Enter, std::type_index{typeid(B_2)} },
+			Status{ Event::Enter, std::type_index{typeid(B_2_2)} },
 		};
 		_.assertHistory(update4);
 
@@ -361,22 +361,22 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update5[] = {
-			Status{ Event::Update, typeid(B) },
-			Status{ Event::Transition, typeid(B) },
-			Status{ Event::Update, typeid(B_1) },
-			Status{ Event::Transition, typeid(B_1) },
-			Status{ Event::Update, typeid(B_1_1) },
-			Status{ Event::Transition, typeid(B_1_1) },
-			Status{ Event::Update, typeid(B_2) },
-			Status{ Event::Transition, typeid(B_2) },
-			Status{ Event::Update, typeid(B_2_2) },
-			Status{ Event::Transition, typeid(B_2_2) },
+			Status{ Event::Update, std::type_index{typeid(B)} },
+			Status{ Event::Transition, std::type_index{typeid(B)} },
+			Status{ Event::Update, std::type_index{typeid(B_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2)} },
+			Status{ Event::Update, std::type_index{typeid(B_2_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Restart, typeid(B) },
+			Status{ Event::Restart, std::type_index{typeid(B)} },
 
-			Status{ Event::Substitute, typeid(B_2_1) },
+			Status{ Event::Substitute, std::type_index{typeid(B_2_1)} },
 
-			Status{ Event::Resume, typeid(B_2_2) },
+			Status{ Event::Resume, std::type_index{typeid(B_2_2)} },
 		};
 		_.assertHistory(update5);
 
@@ -384,33 +384,33 @@ main(int /*argc*/, char* /*argv*/[]) {
 
 		machine.update(0.0f);
 		const Status update6[] = {
-			Status{ Event::Update, typeid(B) },
-			Status{ Event::Transition, typeid(B) },
-			Status{ Event::Update, typeid(B_1) },
-			Status{ Event::Transition, typeid(B_1) },
-			Status{ Event::Update, typeid(B_1_1) },
-			Status{ Event::Transition, typeid(B_1_1) },
-			Status{ Event::Update, typeid(B_2) },
-			Status{ Event::Transition, typeid(B_2) },
-			Status{ Event::Update, typeid(B_2_2) },
-			Status{ Event::Transition, typeid(B_2_2) },
+			Status{ Event::Update, std::type_index{typeid(B)} },
+			Status{ Event::Transition, std::type_index{typeid(B)} },
+			Status{ Event::Update, std::type_index{typeid(B_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Transition, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Update, std::type_index{typeid(B_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2)} },
+			Status{ Event::Update, std::type_index{typeid(B_2_2)} },
+			Status{ Event::Transition, std::type_index{typeid(B_2_2)} },
 
-			Status{ Event::Schedule, typeid(A_2_2) },
-			Status{ Event::Resume, typeid(A) },
+			Status{ Event::Schedule, std::type_index{typeid(A_2_2)} },
+			Status{ Event::Resume, std::type_index{typeid(A)} },
 
-			Status{ Event::Substitute, typeid(A) },
-			Status{ Event::Substitute, typeid(A_2) },
-			Status{ Event::Substitute, typeid(A_2_2) },
+			Status{ Event::Substitute, std::type_index{typeid(A)} },
+			Status{ Event::Substitute, std::type_index{typeid(A_2)} },
+			Status{ Event::Substitute, std::type_index{typeid(A_2_2)} },
 
-			Status{ Event::Leave, typeid(B_1_1) },
-			Status{ Event::Leave, typeid(B_1) },
-			Status{ Event::Leave, typeid(B_2_2) },
-			Status{ Event::Leave, typeid(B_2) },
-			Status{ Event::Leave, typeid(B) },
+			Status{ Event::Leave, std::type_index{typeid(B_1_1)} },
+			Status{ Event::Leave, std::type_index{typeid(B_1)} },
+			Status{ Event::Leave, std::type_index{typeid(B_2_2)} },
+			Status{ Event::Leave, std::type_index{typeid(B_2)} },
+			Status{ Event::Leave, std::type_index{typeid(B)} },
 
-			Status{ Event::Enter, typeid(A) },
-			Status{ Event::Enter, typeid(A_2) },
-			Status{ Event::Enter, typeid(A_2_2) },
+			Status{ Event::Enter, std::type_index{typeid(A)} },
+			Status{ Event::Enter, std::type_index{typeid(A_2)} },
+			Status{ Event::Enter, std::type_index{typeid(A_2_2)} },
 		};
 		_.assertHistory(update6);
 
@@ -418,9 +418,9 @@ main(int /*argc*/, char* /*argv*/[]) {
 	}
 
 	const Status destroyed[] = {
-		Status{ Event::Leave, typeid(A_2_2) },
-		Status{ Event::Leave, typeid(A_2) },
-		Status{ Event::Leave, typeid(A) },
+		Status{ Event::Leave, std::type_index{typeid(A_2_2)} },
+		Status{ Event::Leave, std::type_index{typeid(A_2)} },
+		Status{ Event::Leave, std::type_index{typeid(A)} },
 	};
 	_.assertHistory(destroyed);
 }

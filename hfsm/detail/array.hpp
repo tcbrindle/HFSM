@@ -26,13 +26,13 @@ public:
 	Array()
 		: View(CAPACITY)
 	{
-		assert(&get(0) == _storage);
+		assert(&this->get(0) == _storage);
 	}
 
 	Array(unsigned& count)
 		: View(CAPACITY, count)
 	{
-		assert(&get(0) == _storage);
+		assert(&this->get(0) == _storage);
 	}
 
 	inline void nullify()						{ hfsm::detail::nullify(_storage);				}
@@ -47,7 +47,7 @@ public:
 	inline Iterator<const Array>   cend() const { return Iterator<const Array>(*this, DUMMY);	}
 
 private:
-	Item _storage[CAPACITY];
+	typename ArrayView<T>::Item _storage[CAPACITY];
 };
 
 #pragma pack(pop)

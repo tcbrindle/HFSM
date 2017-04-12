@@ -7,3 +7,4 @@ set(CMAKE_CXX_EXTENSIONS Off)
 
 add_executable(hfsm_test test/main.cpp)
 target_include_directories(hfsm_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_definitions(hfsm_test PRIVATE "-D_DEBUG")

@@ -3,6 +3,7 @@
 #include "utility.hpp"
 #include "wrap.hpp"
 
+#include <initializer_list>
 #include <tuple>
 
 namespace hfsm::detail {
@@ -118,7 +119,7 @@ HashTable<TK, TV, TC, TH>::Item::Item(const Hash hash, const Key key)
 	, _keyWrap(key)
 {}
 
-//··············································································
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 template <typename TK, typename TV, unsigned TC, typename TH>
 HashTable<TK, TV, TC, TH>::Item::Item(const Hash hash, const Key key, const Value value)
@@ -222,7 +223,7 @@ HashTable<TK, TV, TC, TH>::find(const Key key) {
 	return index != INVALID ? _items[index].value() : nullptr;
 }
 
-//··············································································
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 template <typename TK, typename TV, unsigned TC, typename TH>
 const typename HashTable<TK, TV, TC, TH>::Value*
@@ -291,15 +292,15 @@ HashTable<TK, TV, TC, TH>::probeCount(const unsigned i) const {
 template <typename TK, typename TV, unsigned TC, typename TH>
 unsigned
 HashTable<TK, TV, TC, TH>::skipVacantForward(const unsigned i) const {
-	assert(0 <= i && i <= limit());
+	assert(0 <= i && i <= this->limit());
 
-	if (i < limit()) {
+	if (i < this->limit()) {
 		unsigned n = i;
 		for (; _items[n].vacant(); ++n)
-			if (n < limit())
+			if (n < this->limit())
 				continue;
 			else
-				return limit();
+				return this->limit();
 
 		return n;
 	}

@@ -77,7 +77,7 @@ class Machine {
 		virtual unsigned add(const TypeInfo stateType) = 0;
 	};
 
-	//······································································
+	//Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·
 
 	template <unsigned TCapacity>
 	class StateRegistryT
@@ -116,7 +116,7 @@ class Machine {
 	};
 	using ForkPointers = ArrayView<Fork*>;
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename T>
 	struct ForkT
@@ -188,7 +188,7 @@ public:
 		using Time		 = Time;
 		using Transition = Transition;
 
-	private:
+	//private:
 		inline void preSubstitute(Context&, const Time) const {}
 		inline void preEnter(Context&, const Time)  {}
 		inline void preUpdate(Context&, const Time) {}
@@ -196,7 +196,7 @@ public:
 		inline void postLeave(Context&, const Time) {}
 	};
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 private:
 
 	class Tracked
@@ -210,7 +210,7 @@ private:
 		inline unsigned updateCountAfterEntry() const	{ return _updateCountAfterEntry; }
 		inline unsigned totalUpdateCount() const		{ return _totalUpdateCount;		 }
 
-	private:
+	//private:
 		inline void preEnter(Context&, const Time)  {
 			++_entryCount;
 			_updateCountAfterEntry = 0;
@@ -227,7 +227,7 @@ private:
 		unsigned _totalUpdateCount = 0;
 	};
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	class Timed
 		: public Bare
@@ -238,19 +238,19 @@ private:
 	public:
 		inline auto entryTime() const { return _entryTime; }
 
-	private:
+	//private:
 		inline void preEnter(Context&, const Time time) { _entryTime = time; }
 
 	private:
 		Time _entryTime;
 	};
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename...>
 	class _B;
 
-	// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+	// ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½
 
 	template <typename TInjection, typename... TRest>
 	class _B<TInjection, TRest...>
@@ -263,7 +263,7 @@ private:
 		template <typename T>
 		friend class _S;
 
-	private:
+	public:
 		inline void widePreSubstitute(Context& _, const Time time) const;
 		inline void widePreEnter(Context& _, const Time time);
 		inline void widePreUpdate(Context& _, const Time time);
@@ -271,7 +271,7 @@ private:
 		inline void widePostLeave(Context& _, const Time time);
 	};
 
-	 // · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+	 // ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½
 
 	template <typename TInjection>
 	class _B<TInjection>
@@ -290,7 +290,7 @@ private:
 		inline void transition(Control&, Context&, const Time) const {}
 		inline void leave(Context&, const Time) {}
 
-	private:
+	//private:
 		inline void widePreSubstitute(Context& _, const Time time) const;
 		inline void widePreEnter(Context& _, const Time time);
 		inline void widePreUpdate(Context& _, const Time time);
@@ -311,6 +311,7 @@ private:
 		template <typename>
 		friend class _R;
 
+	public:
 		using Client = T;
 
 		enum {
@@ -321,7 +322,7 @@ private:
 			ProngCount	 = 0,
 		};
 
-	private:
+	//private:
 		_S(ForkPointers& /*forkPointers*/)												{}
 
 		inline void deepLink(StateRegistry& stateRegistry,
@@ -375,18 +376,18 @@ private:
 
 		template <typename>
 		friend class _R;
-
+    public:
 		using State = _S<T>;
 		using Client = typename State::Client;
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #pragma region Substate
 
 		template <unsigned TN, typename...>
 		struct Sub;
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		template <unsigned TN, typename TI, typename... TR>
 		struct Sub<TN, TI, TR...>
@@ -430,7 +431,7 @@ private:
 			Initial initial;
 		};
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		template <unsigned TN, typename TI>
 		struct Sub<TN, TI> {
@@ -475,8 +476,9 @@ private:
 
 #pragma endregion
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
+    public:
 		enum {
 			ReverseDepth = SubStates::ReverseDepth + 1,
 			DeepWidth	 = SubStates::DeepWidth,
@@ -486,7 +488,7 @@ private:
 			Width		 = sizeof...(TS),
 		};
 
-	private:
+	//private:
 		_C(ForkPointers& forkPointers);
 
 		inline void deepLink(StateRegistry& stateRegistry,
@@ -524,7 +526,7 @@ private:
 
 	template <typename T, typename... TS>
 	class _O final
-		: _S<T>
+		: public _S<T>
 	{
 		template <typename, typename...>
 		friend class _C;
@@ -537,14 +539,14 @@ private:
 
 		using State = _S<T>;
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #pragma region Substate
 
 		template <typename...>
 		struct Sub;
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		template <typename TI, typename... TR>
 		struct Sub<TI, TR...>
@@ -587,7 +589,7 @@ private:
 			Initial initial;
 		};
 
-		//······························································
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		template <typename TI>
 		struct Sub<TI> {
@@ -631,8 +633,8 @@ private:
 
 #pragma endregion
 
-		//······································································
-
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public:
 		enum {
 			ReverseDepth = SubStates::ReverseDepth + 1,
 			DeepWidth	 = SubStates::DeepWidth,
@@ -642,7 +644,7 @@ private:
 			Width		 = sizeof...(TS),
 		};
 
-	private:
+	//private:
 		_O(ForkPointers& forkPointers);
 
 		inline void deepLink(StateRegistry& stateRegistry,
@@ -709,14 +711,14 @@ private:
 
 		void update(const Time time);
 
-		template <typename T>
-		inline void changeTo()	{ _requests << Transition(Transition::Type::Restart,  TypeInfo::get<T>());	}
+		template <typename U>
+		inline void changeTo()	{ _requests << Transition(Transition::Type::Restart,  TypeInfo::get<U>());	}
 
-		template <typename T>
-		inline void schedule()	{ _requests << Transition(Transition::Type::Schedule, TypeInfo::get<T>());	}
+		template <typename U>
+		inline void schedule()	{ _requests << Transition(Transition::Type::Schedule, TypeInfo::get<U>());	}
 
-		template <typename T>
-		inline void resume()	{ _requests << Transition(Transition::Type::Resume,   TypeInfo::get<T>());	}
+		template <typename U>
+		inline void resume()	{ _requests << Transition(Transition::Type::Resume,   TypeInfo::get<U>());	}
 
 		inline unsigned id(const Transition request) const	{ return _stateRegistry[*request.stateType]; }
 
@@ -744,7 +746,7 @@ private:
 		template <typename>
 		friend class _R;
 
-	private:
+	public:
 		Control(TransitionQueue& requests)
 			: _requests(requests)
 		{}
@@ -779,12 +781,12 @@ public:
 	template <typename... TInjections>
 	using BaseT = _B<TInjections...>;
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename TClient>
 	using State = _S<TClient>;
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename TClient, typename... TSubStates>
 	using Composite	= _C<TClient, TSubStates...>;
@@ -792,7 +794,7 @@ public:
 	template <typename... TSubStates>
 	using CompositePeers = _C<Base, TSubStates...>;
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename TClient, typename... TSubStates>
 	using Orthogonal = _O<TClient, TSubStates...>;
@@ -800,7 +802,7 @@ public:
 	template <typename... TSubStates>
 	using OrthogonalPeers = _O<Base, TSubStates...>;
 
-	//······································································
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	template <typename TState>
 	using Root = _R<TState>;

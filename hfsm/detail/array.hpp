@@ -38,9 +38,9 @@ public:
 	inline void nullify()						{ hfsm::detail::nullify(_storage);				}
 	inline void fill(const char value)			{ hfsm::detail::fill(_storage, value);			}
 
-	inline Iterator<	  Array>  begin()		{ return Iterator<		Array>(*this, first()); }
-	inline Iterator<const Array>  begin() const { return Iterator<const Array>(*this, first()); }
-	inline Iterator<const Array> cbegin() const { return Iterator<const Array>(*this, first()); }
+	inline Iterator<	  Array>  begin()		{ return Iterator<		Array>(*this, this->first()); }
+	inline Iterator<const Array>  begin() const { return Iterator<const Array>(*this, this->first()); }
+	inline Iterator<const Array> cbegin() const { return Iterator<const Array>(*this, this->first()); }
 
 	inline Iterator<	  Array>	end()		{ return Iterator<		Array>(*this, DUMMY);	}
 	inline Iterator<const Array>	end() const { return Iterator<const Array>(*this, DUMMY);	}
